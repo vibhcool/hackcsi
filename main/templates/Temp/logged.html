@@ -95,14 +95,17 @@
 
                             <p class="lead" style="font-size:15px"> >&nbsp;{{ i.user.user_name }}
                             </p>
-                            Tags: <a href=""><span
-                                class="badge badge-info">   {% if t.opinion_set.all %}
-                            {% for j in i.tag_set.all %}
+                                {% if i.tag_set.all %}
+                                        Tags:                            
+                                {% for j in i.tag_set.all %}
+                                            <a href=""><span
+                                class="badge badge-info">                                
                                 {{ j.tag_name }}
+        </span></a>
                             {% endfor %}
                         {% else %}
-                            <li>
-                        {% endif %}</span></a>
+                           
+                        {% endif %}
 
                         </div>
                     {% endfor %}
@@ -117,7 +120,9 @@
                 {% csrf_token %}
                 <input type="text" class="form-control input-lg" name="topic_text"
                        placeholder="Enter a new topic:" required>
-                <br>
+                   <br>
+             <input type="text" class="form-control input-lg" name="topic_desc" placeholder="Enter topic description:" required>
+<br>
                 <input type="text" class="form-control input-lg" name="tag_text" placeholder="Enter tags:"
                        required>
                 <br>

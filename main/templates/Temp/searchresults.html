@@ -88,9 +88,22 @@
         {% if list %}
             <ul>
                 {% for i in list %}
-                    <li><a href="{% url 'main:topic' i.id %}">"{{ i.topic_text }}"</a> <i><br>by:{{ i.user.user_name }}</i></li>
-                {% endfor %}
+                    <li><a href="{% url 'main:topic' i.id %}">"{{ i.topic_text }}"</a> <i><br>by:{{ i.user.user_name }}</i>
+                
+                                 {% if i.tag_set.all %}
+            {% for j in i.tag_set.all %}
+            
+
+                {{ j.tag_name }}
+            {% endfor %}
+         
+        {% endif %}
+
+</li>
+{% endfor %}
+
             </ul>
+
         {% else %}
             <h6>No topics available for keyword searched</h6>
         {% endif %}

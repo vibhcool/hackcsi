@@ -36,6 +36,19 @@
     <h3 align="center"><b>{{ t.topic_desc }}</i></h3>
 
 </div>
+
+<div align="center">
+        {% if t.tag_set.all %}
+            {% for i in t.tag_set.all %}
+            
+
+                {{ i.tag_name }}
+            {% endfor %}
+        {% else %}
+                No Tags 
+        {% endif %}
+</div>
+
     <br><br>
     <ul>
         {% if t.opinion_set.all %}
