@@ -10,7 +10,7 @@ from django.urls import reverse
 
 
 from .models import Users,Topic,Opinion,Tag
-from main.forms import SignupForm,LoginForm,AddTopicForm,AddOpinionForm
+from main.forms import SignupForm,LoginForm,AddTopicForm,AddOpinionForm,SearchForm
 
 def index(request):
     if request.session.has_key('user_id'):
@@ -31,7 +31,7 @@ def signup(request):
 
 def search(request):
     if request.method == 'POST':
-        topic=AddTopicForm(request.POST)
+        topic=SearchForm(request.POST)
         if topic.is_valid():
 
             #t=Topic.objects.get(topic_text=topic.cleaned_data.get('topic_text'))
