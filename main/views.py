@@ -95,10 +95,13 @@ def addtopic(request):
             tag = tag_str.split(',')
             p=Topic(user=Users.objects.get(pk=uid),topic_text=topic_str,topic_desc=topic_desc)
             p.save()
-            for i in tag:
-                q = Tag(topic=Topic.objects.get(topic_text=topic_str),
-                        tag_name=i)
-                q.save()
+            try:
+                for i in tag:
+                    q = Tag(topic=Topic.objects.get(topic_text=topic_str),
+                            tag_name=i)
+                    q.save()
+            except: 
+                return HttpResponse("Topic already exists")    
         else:
             return HttpResponse("Form not valid")
     else:
