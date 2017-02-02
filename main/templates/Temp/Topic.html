@@ -32,6 +32,10 @@
 <div class="container jumbotron">
     <h2 align="center"><b>{{ t.topic_text }} </b><i>by: {{ t.user.user_name }}</i></h2>
 
+<div>
+    <h3 align="center"><b>{{ t.topic_desc }}</i></h3>
+
+</div>
     <br><br>
     <ul>
         {% if t.opinion_set.all %}

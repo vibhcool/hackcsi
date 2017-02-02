@@ -91,8 +91,9 @@ def addtopic(request):
             tag = []
             tag_str=topic.cleaned_data.get('tag_text')
             topic_str = topic.cleaned_data.get('topic_text')            
+            topic_desc = topic.cleaned_data.get('topic_desc')            
             tag = tag_str.split(',')
-            p=Topic(user=Users.objects.get(pk=uid),topic_text=topic_str)
+            p=Topic(user=Users.objects.get(pk=uid),topic_text=topic_str,topic_desc=topic_desc)
             p.save()
             for i in tag:
                 q = Tag(topic=Topic.objects.get(topic_text=topic_str),

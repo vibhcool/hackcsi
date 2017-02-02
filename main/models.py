@@ -16,6 +16,7 @@ class Topic(models.Model):
     #tags = models.ForeignKey(Tag, on_delete = models.CASCADE)
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
     topic_text = models.CharField(max_length=250)
+    topic_desc=models.CharField(max_length=700,default="")
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
     def was_published_recently(self):
