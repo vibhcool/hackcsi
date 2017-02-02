@@ -9,7 +9,7 @@ from django.urls import reverse
 #from django.core.urlresolvers import reverse
 
 
-from .models import Users,Topic,Opinion
+from .models import Users,Topic,Opinion,Tag
 from main.forms import SignupForm,LoginForm,AddTopicForm,AddOpinionForm
 
 def index(request):
@@ -88,8 +88,16 @@ def addtopic(request):
         uid = request.session['user_id']
         topic=AddTopicForm(request.POST)
         if topic.is_valid():
-            p=Topic(user=Users.objects.get(pk=uid),topic_text=topic.cleaned_data.get('topic_text'))
+            tag = []
+            tag_str=topic.cleaned_data.get('tag_text')
+            topic_str = topic.cleaned_data.get('topic_text')            
+            tag = tag_str.split(',')
+            p=Topic(user=Users.objects.get(pk=uid),topic_text=topic_str)
             p.save()
+            for i in tag:
+                q = Tag(topic=Topic.objects.get(topic_text=topic_str),
+                        tag_name=i)
+                q.save()
         else:
             return HttpResponse("Form not valid")
     else:

@@ -13,6 +13,7 @@ class LoginForm(forms.Form):
 
 class AddTopicForm(forms.Form):
     topic_text=forms.CharField(max_length = 250)
+    tag_text=forms.CharField(max_length = 250)
 
 class AddOpinionForm(forms.Form):
     opinion_text=forms.CharField(max_length = 500)

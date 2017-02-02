@@ -7,13 +7,13 @@ class Users(models.Model):
     email = models.CharField(max_length=120)
     pwd= models.CharField(max_length=80)
     no_of_topics=models.IntegerField(default=0)
-    type=models.IntegerField(default=0) #simple=0 org=1
+    #type_user=models.IntegerField(default=0) #simple=0 org=1
     def __str__(self):
         return self.user_name
 
 
 class Topic(models.Model):
-    tags = models.ForeignKey(Tag, on_delete = models.CASCADE)
+    #tags = models.ForeignKey(Tag, on_delete = models.CASCADE)
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
     topic_text = models.CharField(max_length=250)
     upvotes = models.IntegerField(default=0)
@@ -29,7 +29,7 @@ class Topic(models.Model):
 class Tag(models.Model):
     tag_name= models.CharField(max_length=50)
     tag_desc=models.CharField(max_length=500,default="")
-
+    topic = models.ForeignKey(Topic, on_delete = models.CASCADE)
     def __str__(self):
         return self.tag_name
 
