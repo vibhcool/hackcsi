@@ -37,11 +37,11 @@
         }
     </script>
 </head>
-<body>
+<body style="background: #eeeeee">
 
 
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-<div id="flipkart-navbar">
+<div id="flipkart-navbar" style="background: #576396">
     <div class="container">
         <div class="row row1" style="margin-top: 20px;padding-bottom:20px">
             <div class="col-sm-2">
@@ -85,10 +85,10 @@
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-sm-9">
-            <ul style="list-style-type: none">
+            <ul style="list-style-type: none" >
                 {% if list %}
                     {% for i in list %}
-                        <div style="border:1px solid #eeeeee;background:#f2f2f2;margin-bottom: 5px;border-radius:5px;padding:0px 20px 10px 20px">
+                        <div style="border:1px solid #eeeeee;background:#fff;margin-bottom: 5px;border-radius:5px;padding:0px 20px 10px 20px">
                             <h3><a
                                     href="{% url 'main:topic' i.id %}">{{ i.topic_text }}</a>
                             </h3>
@@ -115,7 +115,7 @@
             </ul>
         </div>
 
-        <div class="col-sm-3" style="height: 300px;position: fixed;right:0">
+        <div class="col-sm-3" style="position: fixed;right:0;border: 1px solid #e3e3e3;padding: 10px;background: #576396;border-radius: 5px">
             <form class="form" method="POST" action="{% url 'main:addtopic' %}">
                 {% csrf_token %}
                 <input type="text" class="form-control input-lg" name="topic_text"
@@ -126,7 +126,7 @@
                 <input type="text" class="form-control input-lg" name="tag_text" placeholder="Enter tags:"
                        required>
                 <br>
-                <button class="btn btn-success">Add Topic</button>
+                <button class="btn btn-default">Add Topic</button>
 
             </form>
         </div>

@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>TheTalkSquare</title>
 
-    <meta name="generator" content="Bootply" />
+    <meta name="generator" content="Bootply"/>
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <!--[if lt IE 9]>
         <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -18,7 +18,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <style>
-        .jumbotron {padding: 5px;}
+        .jumbotron {
+            padding: 5px;
+        }
     </style>
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -38,10 +40,10 @@
         }
     </script>
 </head>
-<body>
+<body style="background: #eeeeee">
 
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-<div id="flipkart-navbar">
+<div id="flipkart-navbar" style="background: #576396">
     <div class="container">
         <div class="row row1" style="margin-top: 20px;padding-bottom:20px">
             <div class="col-sm-2">
@@ -82,44 +84,39 @@
     </div>
 </div>
 
-    <div class="container">
-    <h2>Search Results:</h2>
-    <div class="jumbotron">
-        {% if list %}
-            <ul>
-                {% for i in list %}
-                    <li><a href="{% url 'main:topic' i.id %}">"{{ i.topic_text }}"</a> <i><br>by:{{ i.user.user_name }}</i></li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <h6>No topics available for keyword searched</h6>
-        {% endif %}
-    </div>
-    </div>
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
 
-    <br><br>
-<!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h3> <b> FOR ANY PROBLEMS CONTACT: </b><br>
-                        Sebin Duke Stephan
-                    </h3>
-                    <ul class="list-unstyled">
-                        <li><i class="fa fa-phone fa-fw"></i>+91 9868075098</li>
-                        <li><i class="fa fa-envelope-o fa-fw"></i>
-			<a href="mailto:sebindukestephan@gmail.com">sebindukestephan@gmail.com</a>
-                        </li>
-                    </ul>
-                    <br>
-                    <hr class="small">
-                    <p class="text-muted">Copyright &copy; TheTalkSquare </p>
-                </div>
-            </div>
+        <div class="col-sm-9" style="margin-top: 20px">
+            <ul style="list-style-type: none">
+                {% if list %}
+                    {% for i in list %}
+                        <div style="border:1px solid #eeeeee;background:#fff;margin-bottom: 5px;border-radius:5px;padding:0px 20px 10px 20px">
+                            <h3><a
+                                    href="{% url 'main:topic' i.id %}">{{ i.topic_text }}</a>
+                            </h3>
+
+                            <p class="lead" style="font-size:15px"> >&nbsp;{{ i.user.user_name }}
+                            </p>
+                            {% if i.tag_set.all %}
+                                Tags:
+                                {% for j in i.tag_set.all %}
+                                    <a href=""><span
+                                            class="badge badge-info">
+                                {{ j.tag_name }}
+        </span></a>
+                                {% endfor %}
+                            {% else %}
+
+                            {% endif %}
+
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <li>No topics available</li>
+                {% endif %}
+            </ul>
         </div>
-        <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
-    </footer>
- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5892d5e98848c5c0"></script>
+
 </body>
 </html>

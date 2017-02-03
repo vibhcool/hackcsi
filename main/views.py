@@ -40,8 +40,12 @@ def search(request):
             for t in top_li:
                 if re.search(topic.cleaned_data.get('topic_text'),t.topic_text,re.IGNORECASE):
                     li.append(t)
-
-            return render(request, 'Temp/searchresults.html', {"list": li})
+            if request.session.has_key('user_id'):
+                uid = request.session['user_id']
+                user = Users.objects.get(pk=uid)
+                return render(request, 'Temp/searchresults.html', {'user_id':user,"list": li})
+            else:
+                return render(request, 'Temp/searchresultL.html', {"list": li})
         else:
             return HttpResponse("Form not valid")
     else:
@@ -68,7 +72,7 @@ def logInReq(request):
             except Users.DoesNotExist:
                 return HttpResponse("WRONG USERNAME OR PASSWORD")
 
-        
+
 """
 class LoggedIn(generic.DetailView):
 	model = Users
@@ -90,8 +94,8 @@ def addtopic(request):
         if topic.is_valid():
             tag = []
             tag_str=topic.cleaned_data.get('tag_text')
-            topic_str = topic.cleaned_data.get('topic_text')            
-            topic_desc = topic.cleaned_data.get('topic_desc')            
+            topic_str = topic.cleaned_data.get('topic_text')
+            topic_desc = topic.cleaned_data.get('topic_desc')
             tag = tag_str.split(',')
             p=Topic(user=Users.objects.get(pk=uid),topic_text=topic_str,topic_desc=topic_desc)
             p.save()
@@ -100,8 +104,8 @@ def addtopic(request):
                     q = Tag(topic=Topic.objects.get(topic_text=topic_str),
                             tag_name=i)
                     q.save()
-            except: 
-                return HttpResponse("Topic already exists")    
+            except:
+                return HttpResponse("Topic already exists")
         else:
             return HttpResponse("Form not valid")
     else:
