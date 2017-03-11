@@ -65,16 +65,18 @@
             </div>
             <div class="col-sm-1">
                 <ul style="padding-top:5px;list-style:none">
-                    <li><h4 style="font-size: 15px;font-weight: bolder"> {{ user_id.user_name }}</h4>
-
-
-                    </li>
+                    {% if user_id %}
+                    <li><h4 style="font-size: 15px;font-weight: bolder"> {{ user_id.user_name }}</h4> </li>
+                    {% endif %}
                 </ul>
             </div>
             <div class="col-sm-1">
                 <ul style="padding-top:5px;list-style:none">
-                    <li><a style="font-size: 15px;font-weight: bolder" href="logout" class="btn btn-warning">Log Out</a>
-                    </li>
+                    {% if user_id %}
+                    <li><a style="font-size: 15px;font-weight: bolder" href="{% url 'login:logout' %}" class="btn btn-warning">Log Out</a></li>
+                    {% else %}
+                    <li><a style="font-size: 15px;font-weight: bolder" href="{% url 'login:login' %}" class="btn btn-warning">Log In</a></li>
+                    {% endif %}
 
                 </ul>
             </div>

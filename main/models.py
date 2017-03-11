@@ -1,20 +1,9 @@
 from django.db import models
-
-class Users(models.Model):
-    user_name = models.CharField(max_length=80,unique=True)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    email = models.CharField(max_length=120)
-    pwd= models.CharField(max_length=80)
-    no_of_topics=models.IntegerField(default=0)
-    #type_user=models.IntegerField(default=0) #simple=0 org=1
-    def __str__(self):
-        return self.user_name
-
+from login.models import User
 
 class Topic(models.Model):
     #tags = models.ForeignKey(Tag, on_delete = models.CASCADE)
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     topic_text = models.CharField(max_length=250)
     topic_desc=models.CharField(max_length=700,default="")
     upvotes = models.IntegerField(default=0)
@@ -35,7 +24,7 @@ class Tag(models.Model):
         return self.tag_name
 
 class Opinion(models.Model):
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     topic=models.ForeignKey(Topic,on_delete=models.CASCADE)
     opinion_text=models.CharField(max_length=500)
     upvotes = models.IntegerField(default=0)
