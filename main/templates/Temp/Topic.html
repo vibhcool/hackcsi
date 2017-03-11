@@ -67,16 +67,18 @@
             </div>
             <div class="col-sm-1">
                 <ul style="padding-top:5px;list-style:none">
-                    <li><h4 style="font-size: 15px;font-weight: bolder"> {{ user_id.user_name }}</h4>
-
-
-                    </li>
+                    {% if request.session.user_id %}
+                    <li><h4 style="font-size: 15px;font-weight: bolder"> {{ user_id.user_name }}</h4> </li>
+                    {% endif %}
                 </ul>
             </div>
             <div class="col-sm-1">
                 <ul style="padding-top:5px;list-style:none">
-                    <li><a style="font-size: 15px;font-weight: bolder" href="#" class="btn btn-warning">Log Out</a>
-                    </li>
+                    {% if request.session.user_id %}
+                    <li><a style="font-size: 15px;font-weight: bolder" href="{% url 'login:logout' %}" class="btn btn-warning">Log Out</a></li>
+                    {% else %}
+                    <li><a style="font-size: 15px;font-weight: bolder" href="{% url 'login:login' %}" class="btn btn-warning">Log In</a></li>
+                    {% endif %}
 
                 </ul>
             </div>
@@ -119,7 +121,8 @@
         {% endif %}
     </ul>
 
-<h4>Comment Sectoion :: </h4>
+ {% if request.session.user_id %}
+<h4>Comment Sectoion : </h4>
     <div class="modal-body">
         <form class="form" method="POST" action="{% url 'main:addopinion' %}">
             {% csrf_token %}
@@ -139,6 +142,9 @@
         </form>
     </div>
 </div>
+{% else %}
+<h4>Log-In to give your opinion: <a style="font-size: 15px;font-weight: bolder" href="{% url 'login:login' %}" class="btn btn-warning">Log In</a></h4>
+{% endif %}
 
 <script type="text/javascript"
         src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5892d5e98848c5c0"></script>

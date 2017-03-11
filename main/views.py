@@ -68,7 +68,7 @@ def addtopic(request):
             topic_str = topic.cleaned_data.get('topic_text')
             topic_desc = topic.cleaned_data.get('topic_desc')
             tag = tag_str.split(',')
-            p=Topic(user=Users.objects.get(pk=uid),topic_text=topic_str,topic_desc=topic_desc)
+            p=Topic(user=User.objects.get(pk=uid),topic_text=topic_str,topic_desc=topic_desc)
             p.save()
             try:
                 for i in tag:
@@ -100,4 +100,5 @@ def addopinion(request):
 class TopicView(generic.DetailView):
 	model = Topic
 	template_name = 'Temp/Topic.html'
+
 	context_object_name = 't'
