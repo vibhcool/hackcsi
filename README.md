@@ -4,7 +4,7 @@ A social website where people post about public issues and can have debate on th
 ## Instructions to Build and run the code:
 
 ### To download the code copy paste the following on your terminal:
-> git clone https://github.com/SebinDuke/TheTalkSquare.git
+> git clone https://github.com/vibhcool/hackcsi.git
 
 ### To run the code go to TheTalkSquare(outer) folder inyour terminal and run the following code:
 > python3 manage.py runserver
